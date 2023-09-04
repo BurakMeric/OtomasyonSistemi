@@ -1,0 +1,44 @@
+﻿@model List<MvcOnlineTicariOtomasyon.Models.Sınıflar.Kategori>
+@{
+    ViewBag.Title = "Kategori Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Kategori Listesi</h2>
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kategori Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kategori in Model)
+        {
+            <tr>
+                <td>@kategori.KategoriId</td>
+                <td>@kategori.KategoriAd</td>
+                <td>
+                    <a href="#" class="btn btn-danger" onclick="confirmDelete(@kategori.KategoriId)">Sil</a>
+                </td>
+                <td>
+                    <a href="/Kategori/KategoriGetir/@kategori.KategoriId" class="btn btn-success">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function confirmDelete(kategoriId) {
+        var result = confirm("Kategoriyi silmekten emin misiniz?");
+        if (result) {
+            window.location.href = "/Kategori/KategoriSil/" + kategoriId;
+        }
+    }
+</script>
+
+<a href="/Kategori/KategoriEkle" class="btn btn-primary">Kategori Ekle</a>

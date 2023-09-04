@@ -1,0 +1,37 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Sınıflar.Kategori
+
+@{
+    ViewBag.Title = "Kategori Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+<h2>Kategori Ekle</h2>
+<br />
+
+@using (Html.BeginForm("KategoriEkle", "Kategori", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.KategoriAd)
+        @Html.TextBoxFor(x => x.KategoriAd  , new { @class = "form-control" })
+    </div>
+    <button class="btn btn-primary" id="Ekle">Ekle</button>
+    <a href="/Kategori/Index" class="btn btn-danger">İptal</a>
+}
+
+
+<script>
+    document.getElementById("Ekle").addEventListener("click", function () {
+        Swal.fire({
+            title: 'Kategoriyi silmek istediğinize emin misiniz?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.forms[0].submit();
+            }
+        });
+    });
+</script>
+
